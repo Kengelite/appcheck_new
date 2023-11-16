@@ -128,6 +128,7 @@ class _PagescoreState extends State<Pagescore> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text("สรุปคะแนนทั้งหมด"),
       ),
       body: check_load_data
