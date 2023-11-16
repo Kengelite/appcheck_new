@@ -52,8 +52,7 @@ class _PageMenuState extends State<PageMenu> {
     setState(() {
       id = prefs.getString('id')!;
       name = prefs.getString('name')!;
-  fullid =prefs.getString('std_id')!; 
-
+      fullid = prefs.getString('std_id')!;
     });
   }
 
@@ -313,26 +312,28 @@ class _PageMenuState extends State<PageMenu> {
     );
   }
 
- Widget box_datablank() {
-  return Container(
+  Widget box_datablank() {
+    return Container(
 // ปรับขนาดตามต้องการ
-    color: Colors.grey.withOpacity(0.2), // ตั้งค่าสีพื้นหลังแบบโปร่งแสง
-    child: Center(
-      child: LoadingAnimationWidget.staggeredDotsWave(
-        color: Colors.blue,
-        size: 100, // ปรับขนาดลงตามต้องการ
+      color: Colors.grey.withOpacity(0.2), // ตั้งค่าสีพื้นหลังแบบโปร่งแสง
+      child: Center(
+        child: LoadingAnimationWidget.staggeredDotsWave(
+          color: Colors.blue,
+          size: 100, // ปรับขนาดลงตามต้องการ
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return 
-    Scaffold(
+    return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title:
-        // Text('คุณ $name', style: TextStyle(fontSize: 20, color: Colors.black)),
-            Text('รหัสนักศึกษา $fullid', style: TextStyle(fontSize: 20, color: Colors.black)),
+            // Text('คุณ $name', style: TextStyle(fontSize: 20, color: Colors.black)),
+            Text('รหัสนักศึกษา $fullid',
+                style: TextStyle(fontSize: 20, color: Colors.black)),
         actions: [
           Padding(
             padding: EdgeInsets.fromLTRB(0, 0, 10, 0), // ปรับระยะห่างตามต้องการ
@@ -340,7 +341,7 @@ class _PageMenuState extends State<PageMenu> {
               onPressed: () {
                 prefs.remove('id');
                 prefs.remove('name');
-                 prefs.remove('std_id');
+                prefs.remove('std_id');
                 // std_id
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => MyHomePage()));
@@ -538,8 +539,7 @@ class _PageMenuState extends State<PageMenu> {
             ),
           ),
           Positioned.fill(
-            child: 
-            Visibility(
+            child: Visibility(
               visible: check_load_data,
               child: GestureDetector(
                   onTap: () {
