@@ -218,9 +218,7 @@ Future<Position> _determinePosition() async {
       // ),
       body: check_load_data ? box_datablank() : Form(
         key: _formKenty,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0,150,0,0),
-          child: Column(
+        child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
@@ -304,7 +302,7 @@ Future<Position> _determinePosition() async {
                           child: Text("เข้าสู่ระบบ",
                               style: TextStyle(
                                   fontSize: 20,
-                                  letterSpacing: 3.0,
+                                  letterSpacing: 1.0,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold)),
                         ),
@@ -314,7 +312,7 @@ Future<Position> _determinePosition() async {
             ],
           ),
         ),
-      ),
+    
     );
   }
 }
