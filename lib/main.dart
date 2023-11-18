@@ -141,7 +141,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-
   @override
   void initState() {
     WidgetsFlutterBinding.ensureInitialized();
@@ -165,42 +164,44 @@ class _MyHomePageState extends State<MyHomePage> {
       check_load_data = false;
     }
   }
-Future<Position> _determinePosition() async {
-  bool serviceEnabled;
-  LocationPermission permission;
 
-  // Test if location services are enabled.
-  serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  if (!serviceEnabled) {
-    // Location services are not enabled don't continue
-    // accessing the position and request users of the 
-    // App to enable the location services.
-    return Future.error('Location services are disabled.');
-  }
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
 
-  permission = await Geolocator.checkPermission();
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      // Permissions are denied, next time you could try
-      // requesting permissions again (this is also where
-      // Android's shouldShowRequestPermissionRationale 
-      // returned true. According to Android guidelines
-      // your App should show an explanatory UI now.
-      return Future.error('Location permissions are denied');
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      return Future.error('Location services are disabled.');
     }
-  }
-  
-  if (permission == LocationPermission.deniedForever) {
-    // Permissions are denied forever, handle appropriately. 
-    return Future.error(
-      'Location permissions are permanently denied, we cannot request permissions.');
-  } 
 
-  // When we reach here, permissions are granted and we can
-  // continue accessing the position of the device.
-  return await Geolocator.getCurrentPosition();
-}
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permissions are denied, next time you could try
+        // requesting permissions again (this is also where
+        // Android's shouldShowRequestPermissionRationale
+        // returned true. According to Android guidelines
+        // your App should show an explanatory UI now.
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    return await Geolocator.getCurrentPosition();
+  }
+
   Widget box_datablank() {
     return Center(
         child: LoadingAnimationWidget.staggeredDotsWave(
@@ -216,105 +217,105 @@ Future<Position> _determinePosition() async {
       //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       //   title: const Text("เข้าสู่ระบบ"),
       // ),
-      body: check_load_data ? box_datablank() : Form(
-        key: _formKenty,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0,150,0,0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                // width: 200,
-                child: Image.asset(
-                  "images/index.png",
-                  height: 250,
-                  width: 360,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(17, 20, 17, 0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: TextFormField(
-                    validator: (value) {
-                      if (value == "" || value!.isEmpty) {
-                        return "ข้อมูลไม่ถูกต้อง กรุณาตรวจสอบข้อมูล";
-                      }
-                    },
-                    controller: _txtemail,
-                    decoration: const InputDecoration(
-                        fillColor: Colors.white70,
-                        filled: true,
-                        labelText: "อีเมล",
-                        labelStyle: TextStyle(fontSize: 18),
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0)))),
+      body: check_load_data
+          ? box_datablank()
+          : Form(
+              key: _formKenty,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    // width: 200,
+                    child: Image.asset(
+                      "images/index.png",
+                      height: 250,
+                      width: 360,
+                    ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(17, 20, 17, 0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: TextFormField(
-                    validator: (value) {
-                      if (!RegExp(r'^\d{3}').hasMatch(value!) ||
-                          value!.isEmpty ||
-                          value.length != 5 ||
-                          !value.contains('-') ||
-                          value.indexOf('-') != 3) {
-                        if (!value!.contains('-')) {
-                          return "กรุณาเติม - ให้ครบถ้วน";
-                        } else if (value.length != 5 || value.indexOf('-') != 3) {
-                          return "กรุณากรอกรหัสนักศึกษา 4 ตัวท้ายให้ถูกต้อง";
-                        } else {
-                          return "กรุณากรอกข้อมูลให้ถูกต้อง";
-                        }
-                      }
-                    },
-                    controller: _txtid,
-                    decoration: const InputDecoration(
-                        fillColor: Colors.white70,
-                        filled: true,
-                        labelText: "รหัสนักศึกษา 4 ตัวท้ายมีขีด",
-                        labelStyle: TextStyle(fontSize: 18),
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0)))),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(5, 20, 7, 0),
-                child: SizedBox(
-                    width: double.infinity,
-                    height: 70,
-                    child: TextButton(
-                      onPressed: () {
-                        docheck();
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (context) => PageMenu()));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: Colors.blue),
-                        child: const Center(
-                          child: Text("เข้าสู่ระบบ",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  letterSpacing: 3.0,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(17, 20, 17, 0),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == "" || value!.isEmpty) {
+                            return "ข้อมูลไม่ถูกต้อง กรุณาตรวจสอบข้อมูล";
+                          }
+                        },
+                        controller: _txtemail,
+                        decoration: const InputDecoration(
+                            fillColor: Colors.white70,
+                            filled: true,
+                            labelText: "อีเมล",
+                            labelStyle: TextStyle(fontSize: 18),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15.0)))),
                       ),
-                    )),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(17, 20, 17, 0),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (!RegExp(r'^\d{3}').hasMatch(value!) ||
+                              value!.isEmpty ||
+                              value.length != 5 ||
+                              !value.contains('-') ||
+                              value.indexOf('-') != 3) {
+                            if (!value!.contains('-')) {
+                              return "กรุณาเติม - ให้ครบถ้วน";
+                            } else if (value.length != 5 ||
+                                value.indexOf('-') != 3) {
+                              return "กรุณากรอกรหัสนักศึกษา 4 ตัวท้ายให้ถูกต้อง";
+                            } else {
+                              return "กรุณากรอกข้อมูลให้ถูกต้อง";
+                            }
+                          }
+                        },
+                        controller: _txtid,
+                        decoration: const InputDecoration(
+                            fillColor: Colors.white70,
+                            filled: true,
+                            labelText: "รหัสนักศึกษา 4 ตัวท้ายมีขีด",
+                            labelStyle: TextStyle(fontSize: 18),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15.0)))),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(5, 20, 7, 0),
+                    child: SizedBox(
+                        width: double.infinity,
+                        height: 70,
+                        child: TextButton(
+                          onPressed: () {
+                            docheck();
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (context) => PageMenu()));
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.blue),
+                            child: const Center(
+                              child: Text("เข้าสู่ระบบ",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      letterSpacing: 1.0,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                          ),
+                        )),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }
