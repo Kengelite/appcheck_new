@@ -16,7 +16,7 @@ class _Page_declareState extends State<Page_declare> {
   late SharedPreferences prefs;
   String? id;
   String? name;
-   bool check_load_data = true;
+  bool check_load_data = true;
   api_Pro apiPro = api_Pro();
   final List<Widget> List_dataannounce = [];
   @override
@@ -53,7 +53,7 @@ class _Page_declareState extends State<Page_declare> {
           }
           check_load_data = false;
         } else {
-              check_load_data = false;
+          check_load_data = false;
         }
       }
     } catch (error) {
@@ -83,17 +83,23 @@ class _Page_declareState extends State<Page_declare> {
       padding: const EdgeInsets.all(10.0),
       child: Container(
         width: double.infinity,
-        height: 80,
-         decoration: BoxDecoration(
-          color: Colors.grey.shade100, borderRadius: BorderRadius.circular(16)),
-      child:  ListTile(
-        leading: CircleAvatar(),
-        title: Text('$Head',
-            style: TextStyle(fontSize: 18, color: Colors.black)),
-        subtitle:
-            Text('$content', style: TextStyle(fontSize: 12, color: const Color.fromARGB(255, 109, 109, 109))),
-        // trailing: Text('12:45 am', style: TextStyle(color: Colors.black)),
-      ),
+        height: 100,
+        decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(16)),
+        child: ListTile(
+          leading: CircleAvatar(),
+          title: Text('$Head',
+              style: TextStyle(fontSize: 18, color: Colors.black)),
+          subtitle: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 5, 10, 0),
+            child: Text('$content',
+                style: TextStyle(
+                    fontSize: 12,
+                    color: const Color.fromARGB(255, 109, 109, 109))),
+          ),
+          // trailing: Text('12:45 am', style: TextStyle(color: Colors.black)),
+        ),
       ),
     );
   }
@@ -105,6 +111,7 @@ class _Page_declareState extends State<Page_declare> {
       size: 100,
     ));
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,15 +119,15 @@ class _Page_declareState extends State<Page_declare> {
         centerTitle: true,
         title: const Text("ประกาศ"),
       ),
-      body: check_load_data ? box_laoddata() : SingleChildScrollView(
-        child: 
-      List_dataannounce.isNotEmpty
-              ? Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
-                 child: Column(children: List_dataannounce))
-              : Text("ไม่พบข้อมูล"),
-        
-      ),
+      body: check_load_data
+          ? box_laoddata()
+          : SingleChildScrollView(
+              child: List_dataannounce.isNotEmpty
+                  ? Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+                      child: Column(children: List_dataannounce))
+                  : Text("ไม่พบข้อมูล"),
+            ),
     );
   }
 }

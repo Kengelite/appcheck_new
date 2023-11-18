@@ -188,7 +188,7 @@ class _PageMenuState extends State<PageMenu> {
                           Text(jsonRes["text"],
                               //  textAlign: TextAlign.center,
                               style:
-                                  TextStyle(color: Colors.black, fontSize: 16)),
+                                  TextStyle(color: Colors.red, fontSize: 18)),
                         ],
                       ),
                     ),
