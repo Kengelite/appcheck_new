@@ -51,16 +51,12 @@ class _PagescoreState extends State<Pagescore> {
                 val["score"] + " / " + val["total"], val["text"]));
             setState(() {});
           }
-           check_load_data = false;
-           setState(() {
-            
-          });
-          //  print(check_load_data);
-        } else{
           check_load_data = false;
-          setState(() {
-            
-          });
+          setState(() {});
+          //  print(check_load_data);
+        } else {
+          check_load_data = false;
+          setState(() {});
         }
         print(check_load_data);
       }
@@ -92,7 +88,7 @@ class _PagescoreState extends State<Pagescore> {
       padding: const EdgeInsets.all(10.0),
       child: Container(
         width: double.infinity,
-        height: 80,
+        height: 100,
         decoration: BoxDecoration(
             color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(16)),
@@ -100,10 +96,13 @@ class _PagescoreState extends State<Pagescore> {
           // leading: CircleAvatar(),
           title: Text('$Head $score',
               style: TextStyle(fontSize: 18, color: Colors.black)),
-          subtitle: Text('$content',
-              style: TextStyle(
-                  fontSize: 12,
-                  color: const Color.fromARGB(255, 109, 109, 109))),
+          subtitle: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 5, 10, 0),
+            child: Text('$content',
+                style: TextStyle(
+                    fontSize: 12,
+                    color: const Color.fromARGB(255, 109, 109, 109))),
+          ),
           // trailing: Text('12:45 am', style: TextStyle(color: Colors.black)),
         ),
       ),
