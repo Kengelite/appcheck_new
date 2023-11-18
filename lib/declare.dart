@@ -87,7 +87,7 @@ class _Page_declareState extends State<Page_declare> {
          decoration: BoxDecoration(
           color: Colors.grey.shade100, borderRadius: BorderRadius.circular(16)),
       child:  ListTile(
-        leading: CircleAvatar(),
+        // leading: CircleAvatar(),
         title: Text('$Head',
             style: TextStyle(fontSize: 18, color: Colors.black)),
         subtitle:

@@ -219,7 +219,7 @@ Future<Position> _determinePosition() async {
       body: check_load_data ? box_datablank() : Form(
         key: _formKenty,
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 // width: 200,

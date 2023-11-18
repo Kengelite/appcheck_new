@@ -187,7 +187,7 @@ class _PageMenuState extends State<PageMenu> {
                           Text(jsonRes["text"],
                               //  textAlign: TextAlign.center,
                               style:
-                                  TextStyle(color: Colors.black, fontSize: 16)),
+                                  TextStyle(color: Colors.red, fontSize: 18)),
                         ],
                       ),
                     ),
@@ -330,6 +330,7 @@ class _PageMenuState extends State<PageMenu> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        toolbarHeight: 100.0, 
         title:
             // Text('คุณ $name', style: TextStyle(fontSize: 20, color: Colors.black)),
             Text('รหัสนักศึกษา $fullid',
@@ -356,7 +357,7 @@ class _PageMenuState extends State<PageMenu> {
       body: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.fromLTRB(10, 20, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -423,7 +424,7 @@ class _PageMenuState extends State<PageMenu> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                       child: SizedBox(
-                          width: 200,
+                          // width: 200,
                           height: 160,
                           child: TextButton(
                             onPressed: () {
@@ -482,7 +483,7 @@ class _PageMenuState extends State<PageMenu> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                       child: SizedBox(
-                          width: 200,
+                          // width: 200,
                           height: 160,
                           child: TextButton(
                             onPressed: () {

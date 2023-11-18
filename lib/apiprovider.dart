@@ -4,8 +4,8 @@ import 'dart:convert';
 
 class api_Pro {
   api_Pro();
-  String localapi = "https://tame-jade-duckling-cape.cyclic.app/";
-  // String localapi = "http://localhost:3000";
+  // String localapi = "https://tame-jade-duckling-cape.cyclic.app/";
+  String localapi = "http://localhost:3000";
   Future<http.Response> doChecklogin(String id, String email) async {
     // print("object");
     var _url = Uri.parse('$localapi/checkstd');
