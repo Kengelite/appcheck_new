@@ -34,6 +34,7 @@ class _PageMenuState extends State<PageMenu> {
   late LocationPermission permission;
   bool permissionGranted = false;
   api_Pro apiPro = api_Pro();
+  int check_bouble_scoresubject = 0;
   String _site = "";
   final List<Widget> List_datasubject = [];
 
@@ -240,6 +241,8 @@ class _PageMenuState extends State<PageMenu> {
                 box_data(val["number_subject"], val["sub_id"].toString()));
             setState(() {});
           }
+          check_bouble_scoresubject = 0;
+          setState(() {});
         }
       }
       gethistory_or_score();
@@ -429,7 +432,14 @@ class _PageMenuState extends State<PageMenu> {
                           child: TextButton(
                             onPressed: () {
                               // gethistory_or_score("1");
-                              getdatahistory();
+                              if (check_bouble_scoresubject == 0) {
+                                getdatahistory();
+
+                                setState(() {
+                                  check_bouble_scoresubject = 1;
+                                });
+                              }
+
                               // getlocation();
                               //          Navigator.push(
                               // context, MaterialPageRoute(builder: (context) => Page_history()));

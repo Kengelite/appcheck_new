@@ -109,7 +109,6 @@ class _Page_declareState extends State<Page_declare> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: const Text("ประกาศ"),
       ),
       body: check_load_data ? box_laoddata() : SingleChildScrollView(
