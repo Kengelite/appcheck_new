@@ -249,6 +249,7 @@ class _PageMenuState extends State<PageMenu> {
             setState(() {});
           }
           check_bouble_scoresubject = 0;
+          check_load_data = false;
           setState(() {});
         }
       }
@@ -446,7 +447,11 @@ class _PageMenuState extends State<PageMenu> {
                                   check_bouble_scoresubject = 1;
                                 });
                               }
+                              setState(() {
+                                check_load_data = true;
+                              });
 
+                              // checkname();
                               // getlocation();
                               //          Navigator.push(
                               // context, MaterialPageRoute(builder: (context) => Page_history()));
@@ -560,9 +565,15 @@ class _PageMenuState extends State<PageMenu> {
                             onPressed: () async {
                               // final url =
                               //     Uri.parse('https://deku.posstree.com/en/');
-                              if (await canLaunchUrl(_url)) {
-                                launchUrl(_url,
-                                    mode: LaunchMode.externalApplication);
+                              if (Platform.isAndroid) {
+                                if (!await launchUrl(_url)) {
+                                  throw Exception('Could not launch $_url');
+                                }
+                              } else {
+                                if (!await canLaunchUrl(_url)) {
+                                  launchUrl(_url,
+                                      mode: LaunchMode.externalApplication);
+                                }
                               }
                               // Navigator.push(
                               //     // Mynoti
