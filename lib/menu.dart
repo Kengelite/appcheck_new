@@ -594,7 +594,7 @@ class _PageMenuState extends State<PageMenu> {
                                       child: Container(
                                         width: 160,
                                         child: Image.asset(
-                                          "images/checkstd.png",
+                                          "images/contact.png",
                                           height: 80,
                                           width: 120,
                                         ),
