@@ -333,7 +333,7 @@ class _PageMenuState extends State<PageMenu> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        toolbarHeight: 100.0, 
+        toolbarHeight: 100.0,
         title:
             // Text('คุณ $name', style: TextStyle(fontSize: 20, color: Colors.black)),
             Text('รหัสนักศึกษา $fullid',
@@ -365,7 +365,7 @@ class _PageMenuState extends State<PageMenu> {
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -468,7 +468,7 @@ class _PageMenuState extends State<PageMenu> {
                                       child: Container(
                                         width: 160,
                                         child: Image.asset(
-                                          "images/checkstd.png",
+                                          "images/score.png",
                                           height: 80,
                                           width: 120,
                                         ),
@@ -488,7 +488,7 @@ class _PageMenuState extends State<PageMenu> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -527,7 +527,7 @@ class _PageMenuState extends State<PageMenu> {
                                       child: Container(
                                         width: 160,
                                         child: Image.asset(
-                                          "images/checkstd.png",
+                                          "images/declare.png",
                                           height: 80,
                                           width: 120,
                                         ),
