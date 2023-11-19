@@ -46,6 +46,11 @@ class _PagescoreState extends State<Pagescore> {
       if (rs.statusCode == 200) {
         var jsonRes = await json.decode(rs.body);
         if (jsonRes["success"] == true) {
+          print( jsonRes["score_max"].runtimeType);
+          if(jsonRes["score_max"] >= 1){
+            List_datascore.add(box_data("จำนวนการเช็คชื่อ",
+              jsonRes["score_you"].toString() + " / " + jsonRes["score_max"].toString() +' ครั้ง','หากมีปัญหาให้ติดต่อพี่ TA '));
+          }
           for (var val in jsonRes["data_history"]) {
             List_datascore.add(box_data(val["name_type_quiz"],
                 val["score"] + " / " + val["total"], val["text"]));

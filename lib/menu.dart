@@ -569,8 +569,8 @@ class _PageMenuState extends State<PageMenu> {
                                 if (!await launchUrl(_url)) {
                                   throw Exception('Could not launch $_url');
                                 }
-                              } else {
-                                if (!await canLaunchUrl(_url)) {
+                              } else if (Platform.isIOS) {
+                                if (await canLaunchUrl(_url)) {
                                   launchUrl(_url,
                                       mode: LaunchMode.externalApplication);
                                 }
