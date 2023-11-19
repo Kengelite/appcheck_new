@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'package:app_checkstd/aa.dart';
 import 'package:app_checkstd/apiprovider.dart';
 import 'package:app_checkstd/declare.dart';
@@ -37,6 +37,7 @@ class _PageMenuState extends State<PageMenu> {
   int check_bouble_scoresubject = 0;
   String _site = "";
   final List<Widget> List_datasubject = [];
+  final Uri _url = Uri.parse('http://drnadech.com');
 
   @override
   void initState() {
@@ -55,6 +56,12 @@ class _PageMenuState extends State<PageMenu> {
       name = prefs.getString('name')!;
       fullid = prefs.getString('std_id')!;
     });
+  }
+
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
   }
 
   getIdname() async {
@@ -333,7 +340,7 @@ class _PageMenuState extends State<PageMenu> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        toolbarHeight: 100.0, 
+        toolbarHeight: 100.0,
         title:
             // Text('คุณ $name', style: TextStyle(fontSize: 20, color: Colors.black)),
             Text('รหัสนักศึกษา $fullid',
@@ -488,7 +495,7 @@ class _PageMenuState extends State<PageMenu> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -536,6 +543,66 @@ class _PageMenuState extends State<PageMenu> {
                                     const Padding(
                                       padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                                       child: Text("ประกาศ",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.black)),
+                                    ),
+                                  ],
+                                )),
+                          )),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                      child: SizedBox(
+                          // width: 200,
+                          height: 160,
+                          child: TextButton(
+                            onPressed: () async {
+                              // final url =
+                              //     Uri.parse('https://deku.posstree.com/en/');
+                              if (await canLaunchUrl(_url)) {
+                                launchUrl(_url,
+                                    mode: LaunchMode.externalApplication);
+                              }
+                              // Navigator.push(
+                              //     // Mynoti
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => Page_declare()));
+                            },
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.white,
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 206, 206, 206),
+                                      offset: Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 10.0,
+                                      spreadRadius: 1.0,
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 10, 0, 0),
+                                      child: Container(
+                                        width: 160,
+                                        child: Image.asset(
+                                          "images/checkstd.png",
+                                          height: 80,
+                                          width: 120,
+                                        ),
+                                      ),
+                                    ),
+                                    const Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                      child: Text("เว็บไซต์",
                                           style: TextStyle(
                                               fontSize: 20,
                                               color: Colors.black)),
