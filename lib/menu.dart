@@ -372,7 +372,7 @@ class _PageMenuState extends State<PageMenu> {
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -495,7 +495,7 @@ class _PageMenuState extends State<PageMenu> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
