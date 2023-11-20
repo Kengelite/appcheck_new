@@ -27,6 +27,7 @@ class _PageMenuState extends State<PageMenu> {
   String id = "";
   String name = "";
   String lati = "";
+  int check_type = 0;
   String? fullid;
   bool check_load_data = false;
   String longti = "";
@@ -281,8 +282,14 @@ class _PageMenuState extends State<PageMenu> {
     return TextButton(
       child: Text("$subname", style: TextStyle(fontSize: 16)),
       onPressed: () {
-        Navigator.push(context,
+        if(check_type == 0){
+           Navigator.push(context,
             MaterialPageRoute(builder: (context) => Pagescore(data: id_sub)));
+        }else{
+           Navigator.push(context,
+            MaterialPageRoute(builder: (context) => Page_declare(data: id_sub)));
+        }
+       
       },
     );
   }
@@ -439,6 +446,7 @@ class _PageMenuState extends State<PageMenu> {
                           height: 160,
                           child: TextButton(
                             onPressed: () {
+                              
                               // gethistory_or_score("1");
                               if (check_bouble_scoresubject == 0) {
                                 getdatahistory();
@@ -448,6 +456,7 @@ class _PageMenuState extends State<PageMenu> {
                                 });
                               }
                               setState(() {
+                                check_type = 0;
                                 check_load_data = true;
                               });
 
@@ -509,11 +518,23 @@ class _PageMenuState extends State<PageMenu> {
                           height: 160,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.push(
-                                  // Mynoti
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Page_declare()));
+                              if (check_bouble_scoresubject == 0) {
+                                getdatahistory();
+
+                                setState(() {
+                                  check_bouble_scoresubject = 1;
+                                });
+                              }
+                              setState(() {
+                                check_type = 1;
+                                check_load_data = true;
+                              });
+                              // Navigator.push(
+
+                              // Mynoti
+                              // context,
+                              // MaterialPageRoute(
+                              //     builder: (context) => Page_declare()));
                             },
                             child: Container(
                                 decoration: BoxDecoration(

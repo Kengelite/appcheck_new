@@ -61,10 +61,10 @@ class api_Pro {
         },
         body: json);
   }
-  Future<http.Response> dodataannounce(String id) async {
+  Future<http.Response> dodataannounce(String id,String sub_id) async {
     // print("object");
     var _url = Uri.parse('$localapi/dataannoune');
-    var json = jsonEncode(<String, String>{"id" : id});
+    var json = jsonEncode(<String, String>{"id" : id,"sub_id":sub_id});
     print(_url);
     return await http.post(_url,
         headers: {

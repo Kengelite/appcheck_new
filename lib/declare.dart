@@ -6,7 +6,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Page_declare extends StatefulWidget {
-  const Page_declare({super.key});
+  final String? data;
+  const Page_declare({Key? key, required this.data}) : super(key: key);
 
   @override
   State<Page_declare> createState() => _Page_declareState();
@@ -16,14 +17,15 @@ class _Page_declareState extends State<Page_declare> {
   late SharedPreferences prefs;
   String? id;
   String? name;
-   bool check_load_data = true;
+  String? id_sub;
+  bool check_load_data = true;
   api_Pro apiPro = api_Pro();
   final List<Widget> List_dataannounce = [];
   @override
   void initState() {
     // TODO: implement initState
     getUser();
-
+    id_sub = widget.data;
     super.initState();
   }
 
@@ -38,7 +40,7 @@ class _Page_declareState extends State<Page_declare> {
 
   getdatahistory() async {
     try {
-      var rs = await apiPro.dodataannounce(id.toString());
+      var rs = await apiPro.dodataannounce(id.toString(), id_sub.toString());
       if (rs.statusCode == 200) {
         print("sss");
         var jsonRes = await json.decode(rs.body);
@@ -47,13 +49,13 @@ class _Page_declareState extends State<Page_declare> {
           if (jsonRes["success"] == true) {
             for (var val in jsonRes["data_announce"]) {
               List_dataannounce.add(
-                  box_data(val["head_content"], val["content"].toString()));
+                  box_data(val["head_content"], val["content"].toString(),val["day_hour_created_at"].toString()));
               setState(() {});
             }
           }
           check_load_data = false;
         } else {
-              check_load_data = false;
+          check_load_data = false;
         }
       }
     } catch (error) {
@@ -78,22 +80,42 @@ class _Page_declareState extends State<Page_declare> {
     }
   }
 
-  Widget box_data(String Head, String content) {
+  Widget box_data(String Head, String content, String time) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
         width: double.infinity,
         height: 80,
-         decoration: BoxDecoration(
-          color: Colors.grey.shade100, borderRadius: BorderRadius.circular(16)),
-      child:  ListTile(
-        // leading: CircleAvatar(),
-        title: Text('$Head',
-            style: TextStyle(fontSize: 18, color: Colors.black)),
-        subtitle:
-            Text('$content', style: TextStyle(fontSize: 12, color: const Color.fromARGB(255, 109, 109, 109))),
-        // trailing: Text('12:45 am', style: TextStyle(color: Colors.black)),
-      ),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade100,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: ListTile(
+          // leading: CircleAvatar(),
+          title: Text(
+            '$Head',
+            style: TextStyle(fontSize: 18, color: Colors.black),
+          ),
+          subtitle: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '$content',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: const Color.fromARGB(255, 109, 109, 109),
+                ),
+              ),
+              Text(
+                '$time',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: const Color.fromARGB(255, 109, 109, 109),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -105,21 +127,22 @@ class _Page_declareState extends State<Page_declare> {
       size: 100,
     ));
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("ประกาศ"),
       ),
-      body: check_load_data ? box_laoddata() : SingleChildScrollView(
-        child: 
-      List_dataannounce.isNotEmpty
-              ? Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
-                 child: Column(children: List_dataannounce))
-              : Text("ไม่พบข้อมูล"),
-        
-      ),
+      body: check_load_data
+          ? box_laoddata()
+          : SingleChildScrollView(
+              child: List_dataannounce.isNotEmpty
+                  ? Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+                      child: Column(children: List_dataannounce))
+                  : Text("ไม่พบข้อมูล"),
+            ),
     );
   }
 }
