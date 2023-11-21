@@ -52,7 +52,7 @@ android {
     }
 signingConfigs {
         release {
-            storeFile file('D:/project_job/basicflutter/keystore.jks')
+            storeFile file('D:/app_checkname/keystore.jks')
             keyAlias 'key'
             keyPassword '0944959003k'
             storePassword '0944959003k'
